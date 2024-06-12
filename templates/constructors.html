@@ -20,5 +20,39 @@ Constructors
 {% endblock %}
 
 {% block main %}
-<h1 class="text-center m-4">Constructor Standings</h1>
+<h1 class="m-4">{{ year }} Formula 1 Constructor Standings</h1>
+<div class="card p-3">
+    <div class="container-fluid p-3">
+        <div class="row">
+            <form method="POST" action="/constructors" class="d-flex">
+                <div class="col-auto">
+                    <select class="form-select" name="year" id="year">
+                        {% for year in range(2024, 1957, -1) %}
+                        <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-auto align-self-end">
+                    <button type="submit" class="btn btn-danger">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Team</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        {% for constructor_standing in constructor_standings %}
+        <tr>
+            <td>{{ constructor_standing.position }} </td>
+            <td>{{ constructor_standing.constructor.name}}</td>
+            <td>{{ constructor_standing.points }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
