@@ -8,4 +8,16 @@ e = ergast_py.Ergast()
 
 @app.route("/")
 def index():
-    return render_template("layout.html")
+    return render_template("index.html")
+
+@app.route("/drivers")
+def drivers():
+    return render_template("drivers.html")
+
+@app.route("/constructors")
+def constructors():
+    return render_template("constructors.html")
+
+@app.route("/races")
+def races():
+    return render_template("races.html")
