@@ -10,9 +10,14 @@ e = ergast_py.Ergast()
 def index():
     return render_template("index.html")
 
-@app.route("/drivers")
-def drivers():
-    return render_template("drivers.html")
+@app.route("/drivers", methods=["GET", "POST"])
+def drivers(year=2024):
+    if request.method == "POST":
+        year = request.form.get("year", 2024, type=int)
+    driver_standings = e.season(year).get_driver_standing().driver_standings
+    print(driver_standings)
+    return render_template("drivers.html", driver_standings = driver_standings, year = year, selected_year = year)
+
 
 @app.route("/constructors", methods=["GET", "POST"])
 def constructors(year=2024): 
