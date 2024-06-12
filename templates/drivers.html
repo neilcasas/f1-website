@@ -20,7 +20,9 @@ Drivers
 {% endblock %}
 
 {% block main %}
-<h1 class="m-4">{{ year }} Formula 1 Driver Standings</h1>
+<header>
+    <h1 class="m-4">{{ year }} Formula 1 Driver Standings</h1>
+</header>
 <div class="card p-3 m-3">
     <div class="container-fluid pt-3 pb-3">
         <div class="row">
@@ -28,7 +30,8 @@ Drivers
                 <div class="col-auto me-2">
                     <select class="form-select" name="year" id="year">
                         {% for year in range(2024, 1957, -1) %}
-                        <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}</option>
+                        <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
+                        </option>
                         {% endfor %}
                     </select>
                 </div>
