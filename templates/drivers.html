@@ -42,15 +42,19 @@ Drivers
         <thead>
             <tr>
                 <th>Position</th>
+                <th>Driver</th>
+                <th>Nationality</th>
                 <th>Team</th>
                 <th>Points</th>
             </tr>
         </thead>
-        {% for constructor_standing in constructor_standings %}
+        {% for driver_standing in driver_standings %}
         <tr>
-            <td>{{ constructor_standing.position }} </td>
-            <td>{{ constructor_standing.constructor.name}}</td>
-            <td>{{ constructor_standing.points }}</td>
+            <td>{{ driver_standing.position }}</td>
+            <td>{{ driver_standing.driver.given_name }} {{driver_standing.driver.family_name}} </td>
+            <td>{{ driver_standing.driver.nationality }}</td>
+            <td>{{ driver_standing.constructors[0].name }}</td>
+            <td>{{ driver_standing.points }}</td>
         </tr>
         {% endfor %}
     </table>
