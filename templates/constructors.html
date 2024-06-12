@@ -38,21 +38,23 @@ Constructors
             </form>
         </div>
     </div>
-    <table class="table table-striped">
-        <thead>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Team</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            {% for constructor_standing in constructor_standings %}
             <tr>
-                <th>Position</th>
-                <th>Team</th>
-                <th>Points</th>
+                <td>{{ constructor_standing.position }} </td>
+                <td>{{ constructor_standing.constructor.name}}</td>
+                <td>{{ constructor_standing.points }}</td>
             </tr>
-        </thead>
-        {% for constructor_standing in constructor_standings %}
-        <tr>
-            <td>{{ constructor_standing.position }} </td>
-            <td>{{ constructor_standing.constructor.name}}</td>
-            <td>{{ constructor_standing.points }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 {% endblock %}

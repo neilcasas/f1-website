@@ -38,25 +38,30 @@ Drivers
             </form>
         </div>
     </div>
-    <table class="table table-striped">
-        <thead>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-1">Position</th>
+                    <th class="col-4">Driver</th>
+                    <th class="col-3">Nationality</th>
+                    <th class="col-3">Team</th>
+                    <th class="col-1">Points</th>
+                </tr>
+            </thead>
+            {% for driver_standing in driver_standings %}
             <tr>
-                <th>Position</th>
-                <th>Driver</th>
-                <th>Nationality</th>
-                <th>Team</th>
-                <th>Points</th>
+                <td class="col-1">{{ driver_standing.position }}</td>
+                <td class="col-4">
+                    {{ driver_standing.driver.given_name }}
+                    {{ driver_standing.driver.family_name }}
+                </td>
+                <td class="col-3">{{ driver_standing.driver.nationality }}</td>
+                <td class="col-3">{{ driver_standing.constructors[0].name }}</td>
+                <td class="col-1">{{ driver_standing.points }}</td>
             </tr>
-        </thead>
-        {% for driver_standing in driver_standings %}
-        <tr>
-            <td>{{ driver_standing.position }}</td>
-            <td>{{ driver_standing.driver.given_name }} {{driver_standing.driver.family_name}} </td>
-            <td>{{ driver_standing.driver.nationality }}</td>
-            <td>{{ driver_standing.constructors[0].name }}</td>
-            <td>{{ driver_standing.points }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 {% endblock %}
