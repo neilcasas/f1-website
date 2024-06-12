@@ -7,5 +7,5 @@ app = Flask(__name__)
 e = ergast_py.Ergast()
 
 @app.route("/")
-def hello():
+def index():
     return render_template("layout.html")
