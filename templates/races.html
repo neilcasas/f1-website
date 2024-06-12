@@ -20,5 +20,51 @@ Race Results
 {% endblock %}
 
 {% block main %}
-<h1 class="text-center m-4">Race Results</h1>
+<header>
+    <h1 class="m-4">{{ year }} Formula 1 Race Results</h1>
+</header>
+<div class="card p-3 m-3">
+    <div class="container-fluid pt-3 pb-3">
+        <div class="row">
+            <form method="POST" action="/races" class="d-flex">
+                <div class="col-auto me-2">
+                    <select class="form-select" name="year" id="year">
+                        {% for year in range(2024, 1957, -1) %}
+                        <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-auto align-self-end">
+                    <button type="submit" class="btn btn-danger">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-1">Round</th>
+                    <th class="col-2">Name</th>
+                    <th class="col-2">Circuit</th>
+                    <th class="col-4">Winner</th>
+                    <th class="col-3">Team</th>
+                </tr>
+            </thead>
+            {% for race_result in race_results %}
+            <tr>
+                <td class="col-1">{{ race_result.round_no }}</td>
+                <td class="col-2">{{ race_result.race_name }}</td>
+                <td class="col-2">{{ race_result.circuit.circuit_name }}</td>
+                <td class="col-4">{{ race_result.results[0].driver.given_name }} {{
+                    race_result.results[0].driver.family_name
+                    }}
+                </td>
+                <td class="col-3">{{ race_result.results[0].constructor.name }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
 {% endblock %}
