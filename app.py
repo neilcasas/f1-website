@@ -37,7 +37,9 @@ def races(year=2024):
     # Append to race results list
     for circuit in season_circuits:
         try:
-            race_results.append(e.season(year).circuit(circuit.circuit_id).get_result)
+            # TODO: Make this faster and sort by year
+            race_results.append(e.season(year).circuit(circuit.circuit_id).get_result())
+
         except:
             continue
     return render_template("races.html", race_results = race_results, year = year, selected_year = year)
