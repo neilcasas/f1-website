@@ -21,11 +21,11 @@ Constructors
 
 {% block main %}
 <h1 class="m-4">{{ year }} Formula 1 Constructor Standings</h1>
-<div class="card p-3">
-    <div class="container-fluid p-3">
+<div class="card p-3 m-3">
+    <div class="container-fluid pt-3 pb-3">
         <div class="row">
             <form method="POST" action="/constructors" class="d-flex">
-                <div class="col-auto">
+                <div class="col-auto me-2">
                     <select class="form-select" name="year" id="year">
                         {% for year in range(2024, 1957, -1) %}
                         <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}</option>
