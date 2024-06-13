@@ -19,13 +19,17 @@
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            <!--TODO: Implement cookies for dark mode-->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     {% block nav %}{% endblock %}
+                    <div class="container-fluid">
+                        <button class="btn btn-danger" id="toggle-theme-btn">
+                            Toggle Theme
+                        </button>
+                    </div>
                 </ul>
             </div>
-            <img src="{{ url_for('static', filename='moon.svg') }}" alt="Toggle Theme" id="toggle-theme-btn">
         </div>
     </nav>
     <div class="container">
