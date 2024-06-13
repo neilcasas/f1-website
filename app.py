@@ -9,7 +9,6 @@ e = ergast_py.Ergast()
 
 @app.route("/")
 def index():
-    print(e.get_races())
     return render_template("index.html")
 
 @app.route("/drivers", methods=["GET", "POST"])
@@ -33,6 +32,7 @@ def races(year=2024):
         year = request.form.get("year", 2024, type=int)
     
     race_results = asyncio.run(get_race_results(year))
+    print(race_results)
     
     return render_template("races.html", race_results=race_results, year=year, selected_year=year)
 

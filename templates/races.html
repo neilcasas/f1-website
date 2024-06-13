@@ -54,14 +54,13 @@ Race Results
             </thead>
             {% for race_result in race_results %}
             <tr>
-                <td class="col-1">{{ race_result.round_no }}</td>
-                <td class="col-2">{{ race_result.race_name }}</td>
-                <td class="col-2">{{ race_result.circuit.circuit_name }}</td>
-                <td class="col-4">{{ race_result.results[0].driver.given_name }} {{
-                    race_result.results[0].driver.family_name
-                    }}
+                <td class="col-1">{{ race_result.round }}</td>
+                <td class="col-2">{{ race_result.raceName }}</td>
+                <td class="col-2"> {{ race_result.Circuit.circuitName }}</td>
+                <td class="col-4">{{ race_result.Results[0].Driver.givenName }} {{
+                    race_result.Results[0].Driver.familyName }}
                 </td>
-                <td class="col-3">{{ race_result.results[0].constructor.name }}</td>
+                <td class="col-3">{{ race_result.Results[0].Constructor.name }}</td>
             </tr>
             {% endfor %}
         </table>
