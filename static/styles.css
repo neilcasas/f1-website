@@ -22,6 +22,15 @@ table th {
     width: auto !important;
 }
 
+td {
+    cursor: default;
+}
+
+.driver,
+.constructor {
+    cursor: pointer;
+}
+
 /* Navbar styling */
 
 .navbar-brand {
