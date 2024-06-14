@@ -12,6 +12,7 @@ e = ergast_py.Ergast()
 def index():
     return render_template("index.html")
 
+# Driver standings
 @app.route("/drivers", methods=["GET", "POST"])
 def drivers(year=2024):
     if request.method == "POST":
@@ -20,7 +21,12 @@ def drivers(year=2024):
     print(driver_standings)
     return render_template("drivers.html", driver_standings = driver_standings, year = year, selected_year = year)
 
+# Driver details
+@app.route("/drivers/<string:driver_id>")
+def driver_details(driver_id):
+    return "THIS WORKS!"
 
+# Constructor standings
 @app.route("/constructors", methods=["GET", "POST"])
 def constructors(year=2024): 
     if request.method == "POST":
@@ -28,6 +34,12 @@ def constructors(year=2024):
     constructor_standings = e.season(year).get_constructor_standing().constructor_standings
     return render_template("constructors.html", constructor_standings = constructor_standings, year = year, selected_year = year)
 
+# Constructor details
+@app.route("/constructors/<string:constructor_id>")
+def constructor_details(constructor_id):
+    return "constructors works!"
+
+# Race results
 @app.route("/races", methods=["GET", "POST"])
 def races(year=2024):
     if request.method == "POST":

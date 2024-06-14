@@ -52,11 +52,11 @@ Drivers
                     <th class="col-1">Points</th>
                 </tr>
             </thead>
-            " {% for driver_standing in driver_standings %}
+            {% for driver_standing in driver_standings %}
             <tr>
                 <td class="col-1">{{ driver_standing.position }}</td>
                 <td class="col-4 driver">
-                    <a href="/driver/{{ driver_standing.driver.driver_id }}">
+                    <a href="/drivers/{{ driver_standing.driver.driver_id }}">
                         {{ driver_standing.driver.given_name }}
                         {{ driver_standing.driver.family_name }}
                     </a>
@@ -69,7 +69,7 @@ Drivers
                 </td>
                 <td class="col-1">{{ driver_standing.points }}</td>
             </tr>
-            {% endfor %}"
+            {% endfor %}
         </table>
     </div>
 </div>
