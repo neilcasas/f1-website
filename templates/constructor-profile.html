@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Drivers - {{ driver.given_name }} {{ driver.family_name }}
+Constructor - {{ constructor.name }}
 {% endblock %}
 
 {% block nav %}
@@ -9,9 +9,9 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
     <a class="nav-link" aria-current="page" href="/">Home</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link active" href="/drivers">Drivers</a>
+    <a class="nav-link" href="/drivers">Drivers</a>
 </li>
-<li class="nav-item">
+<li class="nav-item active">
     <a href="/constructors" class="nav-link">Constructors</a>
 </li>
 <li class="nav-item">
@@ -20,11 +20,8 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
 {% endblock %}
 
 {% block main %}
-
 <div class="card m-3 p-3">
-    <h1 class="m-4">{{ driver.given_name }} {{ driver.family_name }}</h1>
-    <div>Date of Birth: {{ driver.date_of_birth }}</div>
-    <div>Nationality: {{ driver.nationality }}</div>
-    <div>Permanent Number: {{ driver.permanent_number }}</div>
+    <h1 class="m-4">{{ constructor.name }}</h1>
+    <div>Nationality: {{ constructor.nationality }}</div>
 </div>
 {% endblock %}

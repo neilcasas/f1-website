@@ -26,7 +26,7 @@ def drivers(year=2024):
 def driver_profile(driver_id):
 
     # Get driver data
-    driver_profile = e.driver(f"{driver_id}").get_driver()
+    driver_profile = e.driver(driver_id).get_driver()
 
     return render_template("driver-profile.html", driver=driver_profile)
 
@@ -36,12 +36,15 @@ def constructors(year=2024):
     if request.method == "POST":
         year = request.form.get("year", 2024, type=int)
     constructor_standings = e.season(year).get_constructor_standing().constructor_standings
+    print(e.constructor("mercedes").get_constructor())
     return render_template("constructors.html", constructor_standings = constructor_standings, year = year, selected_year = year)
 
 # Constructor details
 @app.route("/constructors/<string:constructor_id>")
 def constructor_profile(constructor_id):
-    return "constructors works!"
+    # Get constructor data
+    constructor_data = e.constructor(constructor_id).get_constructor()
+    return render_template("constructor-profile.html", constructor=constructor_data)
 
 # Race results
 @app.route("/races", methods=["GET", "POST"])
