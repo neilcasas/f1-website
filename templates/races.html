@@ -57,10 +57,14 @@ Race Results
                 <td class="col-1">{{ race_result.round }}</td>
                 <td class="col-3">{{ race_result.raceName }}</td>
                 <td class="col-3"> {{ race_result.Circuit.circuitName }}</td>
-                <td class="col-3">{{ race_result.Results[0].Driver.givenName }} {{
+                <td class="col-3 driver">{{ race_result.Results[0].Driver.givenName }} {{
                     race_result.Results[0].Driver.familyName }}
+                    <input type="hidden" id="driver_id" value="{{ race_result.Results[0].Driver.driverId }}">
                 </td>
-                <td class="col-2">{{ race_result.Results[0].Constructor.name }}</td>
+                <td class="col-2 constructor">{{ race_result.Results[0].Constructor.name }}
+                    <input type="hidden" id="constructor_id"
+                        value="{{ race_result.Results[0].Constructor.constructorId }}">
+                </td>
             </tr>
             {% endfor %}
         </table>

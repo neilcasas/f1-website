@@ -52,7 +52,10 @@ Constructors
             {% for constructor_standing in constructor_standings %}
             <tr>
                 <td>{{ constructor_standing.position }} </td>
-                <td class="constructor">{{ constructor_standing.constructor.name}}</td>
+                <td class="constructor">{{ constructor_standing.constructor.name}}
+                    <input type="hidden" id="constructor_id"
+                        value="{{ constructor_standing.constructor.constructor_id }}">
+                </td>
                 <td>{{ constructor_standing.points }}</td>
             </tr>
             {% endfor %}

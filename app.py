@@ -17,6 +17,7 @@ def drivers(year=2024):
     if request.method == "POST":
         year = request.form.get("year", 2024, type=int)
     driver_standings = e.season(year).get_driver_standing().driver_standings
+    print(driver_standings)
     return render_template("drivers.html", driver_standings = driver_standings, year = year, selected_year = year)
 
 
@@ -44,6 +45,7 @@ def races(year=2024):
     
     # Sort by round
     race_results.sort(key=itemgetter('round'))
+    print(race_results)
     
     return render_template("races.html", race_results=race_results, year=year, selected_year=year)
 
