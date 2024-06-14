@@ -23,8 +23,12 @@ def drivers(year=2024):
 
 # Driver details
 @app.route("/drivers/<string:driver_id>")
-def driver_details(driver_id):
-    return "THIS WORKS!"
+def driver_profile(driver_id):
+
+    # Get driver data
+    driver_profile = e.driver(f"{driver_id}").get_driver()
+
+    return render_template("driver-profile.html", driver=driver_profile)
 
 # Constructor standings
 @app.route("/constructors", methods=["GET", "POST"])
@@ -36,7 +40,7 @@ def constructors(year=2024):
 
 # Constructor details
 @app.route("/constructors/<string:constructor_id>")
-def constructor_details(constructor_id):
+def constructor_profile(constructor_id):
     return "constructors works!"
 
 # Race results
@@ -57,9 +61,6 @@ def races(year=2024):
     
     # Sort by round
     race_results.sort(key=itemgetter('round'))
-    print(e.driver("max_verstappen").get_driver())
-    print(e.driver("max_verstappen").season(year).get_driver_standings())
-    print(e.constructor("mercedes").season(year).get_constructor_standing())
     return render_template("races.html", race_results=race_results, year=year, selected_year=year)
 
 # Method for fetching race result per circuit in a season
