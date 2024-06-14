@@ -56,14 +56,16 @@ Drivers
             <tr>
                 <td class="col-1">{{ driver_standing.position }}</td>
                 <td class="col-4 driver">
-                    <a href="/drivers/{{ driver_standing.driver.driver_id }}">
+                    <a href="/drivers/{{ driver_standing.driver.driver_id }}" class="link-danger link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                         {{ driver_standing.driver.given_name }}
                         {{ driver_standing.driver.family_name }}
                     </a>
                 </td>
                 <td class="col-3">{{ driver_standing.driver.nationality }}</td>
                 <td class="col-3 constructor">
-                    <a href="/constructors/{{ driver_standing.constructors[0].constructor_id }}">
+                    <a href="/constructors/{{ driver_standing.constructors[0].constructor_id }}" class="link-danger link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                         {{ driver_standing.constructors[0].name }}
                     </a>
                 </td>

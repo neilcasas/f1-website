@@ -58,13 +58,15 @@ Race Results
                 <td class="col-3">{{ race_result.raceName }}</td>
                 <td class="col-3"> {{ race_result.Circuit.circuitName }}</td>
                 <td class="col-3 driver">
-                    <a href="/drivers/{{ race_result.Results[0].Driver.driverId }}">
+                    <a href="/drivers/{{ race_result.Results[0].Driver.driverId }}" class="link-danger link-offset-2
+                        link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                         {{ race_result.Results[0].Driver.givenName }}
                         {{ race_result.Results[0].Driver.familyName }}
                     </a>
                 </td>
                 <td class="col-2 constructor">
-                    <a href="/constructors/{{ race_result.Results[0].Constructor.constructorId }}">
+                    <a href="/constructors/{{ race_result.Results[0].Constructor.constructorId }}"
+                        class="link-danger link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                         {{ race_result.Results[0].Constructor.name }}
                     </a>
                 </td>

@@ -9,6 +9,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
+a {
+    color: rgb(207, 42, 75);
+}
+
 h1,
 h2 {
     font-family: "Audiowide";
