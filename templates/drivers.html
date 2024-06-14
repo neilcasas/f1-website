@@ -52,23 +52,24 @@ Drivers
                     <th class="col-1">Points</th>
                 </tr>
             </thead>
-            {% for driver_standing in driver_standings %}
+            " {% for driver_standing in driver_standings %}
             <tr>
                 <td class="col-1">{{ driver_standing.position }}</td>
                 <td class="col-4 driver">
-                    {{ driver_standing.driver.given_name }}
-                    {{ driver_standing.driver.family_name }}
-                    <input type="hidden" id="driver_id" value="{{driver_standing.driver.driver_id}}">
+                    <a href="/driver/{{ driver_standing.driver.driver_id }}">
+                        {{ driver_standing.driver.given_name }}
+                        {{ driver_standing.driver.family_name }}
+                    </a>
                 </td>
                 <td class="col-3">{{ driver_standing.driver.nationality }}</td>
                 <td class="col-3 constructor">
-                    {{ driver_standing.constructors[0].name }}
-                    <input type="hidden" id="constructor_id"
-                        value="{{ driver_standing.constructors[0].constructor_id }}">
+                    <a href="/constructors/{{ driver_standing.constructors[0].constructor_id }}">
+                        {{ driver_standing.constructors[0].name }}
+                    </a>
                 </td>
                 <td class="col-1">{{ driver_standing.points }}</td>
             </tr>
-            {% endfor %}
+            {% endfor %}"
         </table>
     </div>
 </div>

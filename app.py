@@ -45,8 +45,9 @@ def races(year=2024):
     
     # Sort by round
     race_results.sort(key=itemgetter('round'))
-    print(race_results)
-    
+    print(e.driver("max_verstappen").get_driver())
+    print(e.driver("max_verstappen").season(year).get_driver_standings())
+    print(e.constructor("mercedes").season(year).get_constructor_standing())
     return render_template("races.html", race_results=race_results, year=year, selected_year=year)
 
 # Method for fetching race result per circuit in a season

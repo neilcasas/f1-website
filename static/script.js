@@ -1,3 +1,4 @@
+// Elements for dark mode
 const rootElement = document.documentElement;
 const darkModeBtn = document.querySelector('#toggle-theme-btn');
 
