@@ -39,14 +39,14 @@ def driver_profile(driver_id):
     mycursor = db.cursor()
 
     # Get driver's rookie year and final year
-    mycursor.execute("SELECT first_year FROM drivers_profile WHERE driver_id = %s", driver_id)
-    db.commit()
-    first_year = mycursor.fetchone()
+    mycursor.execute("SELECT first_year, last_year FROM drivers_profile WHERE driver_id = %s", driver_id)
+    result = mycursor.fetchone()
+    first_year, last_year = result if result else (None, None)
 
-    mycursor.execute("SELECT last_year FROM drivers_profile WHERE driver_id = %s", driver_id)
-    db.commit()
-    last_year = mycursor.fetchone()
-
+    # Close cursor and conection
+    mycursor.close()
+    db.close()
+    
     # Get driver data
     driver_profile = e.driver(driver_id).get_driver()
     driver_standing = e.driver(driver_id).season(last_year).get_driver_standing()
