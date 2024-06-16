@@ -5,7 +5,7 @@ import asyncio
 import aiohttp
 import mysql.connector
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 # Initialize Ergast API
 e = ergast_py.Ergast()
@@ -39,14 +39,14 @@ def driver_profile(driver_id):
     mycursor = db.cursor()
 
     # Get driver's rookie year and final year
-    mycursor.execute("SELECT first_year, last_year FROM drivers_profile WHERE driver_id = %s", driver_id)
+    mycursor.execute("SELECT first_year, last_year FROM driver_profile WHERE driver_id = %s", (driver_id,))
     result = mycursor.fetchone()
     first_year, last_year = result if result else (None, None)
 
     # Close cursor and conection
     mycursor.close()
     db.close()
-    
+
     # Get driver data
     driver_profile = e.driver(driver_id).get_driver()
     driver_standing = e.driver(driver_id).season(last_year).get_driver_standing()
@@ -55,9 +55,12 @@ def driver_profile(driver_id):
     if request.method == "POST":
         year = request.form.get("year", last_year, type=int) # year filter
         driver_standing = e.driver(driver_id).season(year).get_driver_standing()
-        return render_template("driver_profile.html", driver = driver_profile, standing=driver_standing, first_year = first_year, last_year=last_year, year = year)
 
-    return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, year = last_year)
+    if request.method == "GET":
+        year = last_year
+    
+    print(driver_standing)
+    return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, year = year)
 
 # Constructor standings
 @app.route("/constructors", methods=["GET", "POST"])
@@ -65,7 +68,6 @@ def constructors(year=2024):
     if request.method == "POST":
         year = request.form.get("year", 2024, type=int)
     constructor_standings = e.season(year).get_constructor_standing().constructor_standings
-    print(e.constructor("mercedes").get_constructor())
     return render_template("constructors.html", constructor_standings = constructor_standings, year = year, selected_year = year)
 
 # Constructor details

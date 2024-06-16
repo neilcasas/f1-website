@@ -26,5 +26,26 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
     <div>Date of Birth: {{ driver.date_of_birth }}</div>
     <div>Nationality: {{ driver.nationality }}</div>
     <div>Permanent Number: {{ driver.permanent_number }}</div>
+
+    <div class="container-fluid pt-3 pb-3">
+        <div class="row">
+            <form method="POST" action="/drivers/{{ driver.driver_id }}" class="d-flex">
+                <div class="col-auto me-2">
+                    <select class="form-select" name="year" id="year">
+                        {% for year in range(last_year, first_year, -1) %}
+                        <option value="{{ year }}" {% if year==year %}selected{% endif %}>{{ year }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-auto align-self-end">
+                    <button type="submit" class="btn btn-danger">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div> Points: {{ standing.points }}</div>
+
 </div>
 {% endblock %}
