@@ -11,13 +11,13 @@ app = Flask(__name__)
 e = ergast_py.Ergast()
 
 # Connect DB
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="Password1!",
-    database="mode_push"
-)
-mycursor = db.cursor()
+def create_db_connection():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Password1!",
+        database="mode_push"
+    )
 
 @app.route("/")
 def index():
@@ -35,9 +35,8 @@ def drivers(year=2024):
 # Driver details
 @app.route("/drivers/<string:driver_id>", methods=["GET", "POST"])
 def driver_profile(driver_id):
-
-    # Get driver data
-    driver_profile = e.driver(driver_id).get_driver()
+    db = create_db_connection()
+    mycursor = db.cursor()
 
     # Get driver's rookie year and final year
     mycursor.execute("SELECT first_year FROM drivers_profile WHERE driver_id = %s", driver_id)
@@ -48,7 +47,17 @@ def driver_profile(driver_id):
     db.commit()
     last_year = mycursor.fetchone()
 
-    return render_template("driver-profile.html", driver=driver_profile, first_year = first_year, last_year = last_year)
+    # Get driver data
+    driver_profile = e.driver(driver_id).get_driver()
+    driver_standing = e.driver(driver_id).season(last_year).get_driver_standing()
+
+    # If filtered by year
+    if request.method == "POST":
+        year = request.form.get("year", last_year, type=int) # year filter
+        driver_standing = e.driver(driver_id).season(year).get_driver_standing()
+        return render_template("driver_profile.html", driver = driver_profile, standing=driver_standing, first_year = first_year, last_year=last_year, year = year)
+
+    return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, year = last_year)
 
 # Constructor standings
 @app.route("/constructors", methods=["GET", "POST"])
