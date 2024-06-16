@@ -55,12 +55,9 @@ def driver_profile(driver_id):
     if request.method == "POST":
         year = request.form.get("year", last_year, type=int) # year filter
         driver_standing = e.driver(driver_id).season(year).get_driver_standing()
+        return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, selected_year = year)
 
-    if request.method == "GET":
-        year = last_year
-    
-    print(driver_standing)
-    return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, year = year)
+    return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, selected_year = last_year)
 
 # Constructor standings
 @app.route("/constructors", methods=["GET", "POST"])
