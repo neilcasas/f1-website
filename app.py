@@ -65,6 +65,7 @@ def constructors(year=2024):
     if request.method == "POST":
         year = request.form.get("year", 2024, type=int)
     constructor_standings = e.season(year).get_constructor_standing().constructor_standings
+    print(e.season(2020).driver('hamilton').get_driver_standing().driver_standings)
     return render_template("constructors.html", constructor_standings = constructor_standings, year = year, selected_year = year)
 
 # Constructor details
@@ -72,6 +73,7 @@ def constructors(year=2024):
 def constructor_profile(constructor_id):
     # Get constructor data
     constructor_data = e.constructor(constructor_id).get_constructor()
+    print(e.season(1961).round(1).get_results())
     return render_template("constructor-profile.html", constructor=constructor_data)
 
 # Race results
@@ -123,3 +125,10 @@ async def get_race_results(year):
         # Perform the fetch requests in the tasks list concurrently
         race_results = await asyncio.gather(*tasks)
         return [result for result in race_results if result]
+
+# TODO: Add race details per race
+# TODO: Add constructor details as well as database entries
+# TODO: Add news api for homepage
+# TODO: Add championships, wins, and points for drivers and constructors
+# TODO: Add pictures for constructors and drivers
+# TODO: Fix bugs for some drivers profiles returning more than one query
