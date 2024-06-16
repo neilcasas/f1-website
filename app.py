@@ -3,10 +3,21 @@ from operator import itemgetter
 import ergast_py
 import asyncio
 import aiohttp
+import mysql.connector
 
 app = Flask(__name__)
 
+# Initialize Ergast API
 e = ergast_py.Ergast()
+
+# Connect DB
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Password1!",
+    database="mode_push"
+)
+mycursor = db.cursor()
 
 @app.route("/")
 def index():
@@ -22,13 +33,22 @@ def drivers(year=2024):
     return render_template("drivers.html", driver_standings = driver_standings, year = year, selected_year = year)
 
 # Driver details
-@app.route("/drivers/<string:driver_id>")
+@app.route("/drivers/<string:driver_id>", methods=["GET", "POST"])
 def driver_profile(driver_id):
 
     # Get driver data
     driver_profile = e.driver(driver_id).get_driver()
 
-    return render_template("driver-profile.html", driver=driver_profile)
+    # Get driver's rookie year and final year
+    mycursor.execute("SELECT first_year FROM drivers_profile WHERE driver_id = %s", driver_id)
+    db.commit()
+    first_year = mycursor.fetchone()
+
+    mycursor.execute("SELECT last_year FROM drivers_profile WHERE driver_id = %s", driver_id)
+    db.commit()
+    last_year = mycursor.fetchone()
+
+    return render_template("driver-profile.html", driver=driver_profile, first_year = first_year, last_year = last_year)
 
 # Constructor standings
 @app.route("/constructors", methods=["GET", "POST"])
