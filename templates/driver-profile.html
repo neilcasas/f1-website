@@ -24,31 +24,35 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
 <div class="card m-3 p-3">
     <div class="container-fluid">
         <h1>{{ driver.given_name }} {{ driver.family_name }}</h1>
+        <div>Team: {{ standing.driver_standings[0].constructors[0].name }}</div>
         <div>Date of Birth: {{ driver.date_of_birth }}</div>
         <div>Nationality: {{ driver.nationality }}</div>
         <div>Permanent Number: {{ driver.permanent_number }}</div>
     </div>
     <div class="container-fluid pt-3 pb-3">
-        <h1>{{ selected_year }} Driver Standing</h1>
         <div class="row">
-            <form method="POST" action="/drivers/{{ driver.driver_id }}" class="d-flex">
-                <div class="col-auto me-2">
-                    <select class="form-select" name="year" id="year">
-                        {% for year in range(last_year, first_year-1, -1) %}
-                        <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-auto align-self-end">
-                    <button type="submit" class="btn btn-danger">Filter</button>
-                </div>
-            </form>
+            <div class="col-auto ms-1">
+                <h3>{{ selected_year }} Driver Standing</h3>
+            </div>
+            <div class="col">
+                <form method="POST" action="/drivers/{{ driver.driver_id }}" class="d-flex">
+                    <div class="col-auto me-2">
+                        <select class="form-select" name="year" id="year">
+                            {% for year in range(last_year, first_year-1, -1) %}
+                            <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-auto align-self-end">
+                        <button type="submit" class="btn btn-danger">Filter</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <div>Position: {{ standing.driver_standings[0].position }}</div>
         <div>Wins: {{ standing.driver_standings[0].wins }}</div>
         <div>Points: {{ standing.driver_standings[0].points }}</div>
     </div>
-
 </div>
 {% endblock %}
