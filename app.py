@@ -124,7 +124,7 @@ def races(year=2024):
 @app.route("/races/<int:year>/<int:round>")
 def race_results(year, round):
     race_results = e.season(year).round(round).get_result()
-    return render_template("race-results.html", race_results=race_results)
+    return render_template("race-results.html", race_results=race_results, year=year)
 
 # Method for fetching race result per circuit in a season
 async def fetch_race_result(session, year, circuit_id):

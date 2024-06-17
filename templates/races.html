@@ -55,7 +55,11 @@ Race Results
             {% for race_result in race_results %}
             <tr>
                 <td class="col-1">{{ race_result.round }}</td>
-                <td class="col-3">{{ race_result.raceName }}</td>
+                <td class="col-3">
+                    <a href="/races/{{ selected_year }}/{{ race_result.round_no }}">
+                        {{ race_result.raceName }}
+                    </a>
+                </td>
                 <td class="col-3"> {{ race_result.Circuit.circuitName }}</td>
                 <td class="col-3 driver">
                     <a href="/drivers/{{ race_result.Results[0].Driver.driverId }}" class="link-danger link-offset-2
