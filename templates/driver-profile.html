@@ -38,7 +38,7 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
                 <form method="POST" action="/drivers/{{ driver.driver_id }}" class="d-flex">
                     <div class="col-auto me-2">
                         <select class="form-select" name="year" id="year">
-                            {% for year in range(last_year, first_year-1, -1) %}
+                            {% for year in range(driver_db_data["last_year"], driver_db_data["first_year"]-1, -1) %}
                             <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
                             </option>
                             {% endfor %}

@@ -39,9 +39,10 @@ def driver_profile(driver_id):
     mycursor = db.cursor()
 
     # Get driver's rookie year and final year
-    mycursor.execute("SELECT first_year, last_year FROM driver_profile WHERE driver_id = %s", (driver_id,))
+    mycursor.execute("SELECT first_year, last_year, points, wins, championships FROM driver_profile WHERE driver_id = %s", (driver_id,))
     result = mycursor.fetchone()
-    first_year, last_year = result if result else (None, None)
+    first_year, last_year, points, wins, championships = result if result else (None, None, 0, 0, 0)
+    driver_db_data = {"first_year": first_year, "last_year": last_year, "points": points, "wins": wins, "championships": championships}
 
     # Close cursor and conection
     mycursor.close()
@@ -55,9 +56,11 @@ def driver_profile(driver_id):
     if request.method == "POST":
         year = request.form.get("year", last_year, type=int) # year filter
         driver_standing = e.driver(driver_id).season(year).get_driver_standing()
-        return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, selected_year = year)
+        return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, 
+                               driver_db_data = driver_db_data, selected_year = year)
 
-    return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, first_year = first_year, last_year = last_year, selected_year = last_year)
+    return render_template("driver-profile.html", driver=driver_profile, standing=driver_standing, 
+                           driver_db_data=driver_db_data, selected_year = last_year)
 
 # Constructor standings
 @app.route("/constructors", methods=["GET", "POST"])
