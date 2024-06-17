@@ -21,41 +21,94 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
 
 {% block main %}
 
-<div class="card m-3 p-3">
-    <div class="container-fluid">
-        <h1>{{ driver.given_name }} {{ driver.family_name }}</h1>
-        <div>Date of Birth: {{ driver.date_of_birth }}</div>
-        <div>Nationality: {{ driver.nationality }}</div>
-        <div>Permanent Number: {{ driver.permanent_number }}</div>
-        <div>Points: {{ driver_db_data["points"] }}</div>
-        <div>Wins: {{ driver_db_data["wins"] }}</div>
-        <div>Championships: {{ driver_db_data["championships"] }}</div>
-    </div>
-    <div class="container-fluid pt-3 pb-3">
-        <div class="row">
-            <div class="col-auto ms-1">
-                <h3>{{ selected_year }} Driver Standing</h3>
+<div class="card m-3 p-3 profile-card">
+    <div class="row">
+        <div class="col">
+            <img class="img-fluid"
+                src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
+                alt="test">
+        </div>
+        <div class="col">
+            <div class="container-sm">
+                <h1>{{ driver.given_name }} {{ driver.family_name }}</h1>
+                <div class="row">
+                    <div class="col profile-category">Date of Birth</em></div>
+                    <div class="col">{{ driver.date_of_birth }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Nationality</div>
+                    <div class="col">{{ driver.nationality }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Permanent Number</div>
+                    <div class="col">{{ driver.permanent_number }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Points</div>
+                    <div class="col">{{ driver_db_data["points"] }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Wins</div>
+                    <div class="col">{{ driver_db_data["wins"] }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Championships</div>
+                    <div class="col">{{ driver_db_data["championships"] }}</div>
+                </div>
             </div>
-            <div class="col">
-                <form method="POST" action="/drivers/{{ driver.driver_id }}" class="d-flex">
-                    <div class="col-auto me-2">
-                        <select class="form-select" name="year" id="year">
-                            {% for year in range(driver_db_data["last_year"], driver_db_data["first_year"]-1, -1) %}
-                            <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
-                            </option>
-                            {% endfor %}
-                        </select>
+            <div class="container-fluid pt-3 pb-3">
+                <div class="row">
+                    <div class="col-auto ms-1">
+                        <h3>{{ selected_year }} Driver Standing</h3>
                     </div>
-                    <div class="col-auto align-self-end">
-                        <button type="submit" class="btn btn-danger">Filter</button>
+                    <div class="col">
+                        <form method="POST" action="/drivers/{{ driver.driver_id }}" class="d-flex">
+                            <div class="col-auto me-2">
+                                <select class="form-select" name="year" id="year">
+                                    {% for year in range(driver_db_data["last_year"], driver_db_data["first_year"]-1,
+                                    -1) %}
+                                    <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year
+                                        }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-auto align-self-end">
+                                <button type="submit" class="btn btn-danger">Filter</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Team</div>
+                    <div class="col ">{{ standing.driver_standings[0].constructors[0].name }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">
+                        Position
+                    </div>
+                    <div class="col">
+                        {{ standing.driver_standings[0].position }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">
+                        Wins
+                    </div>
+                    <div class="col">
+                        {{ standing.driver_standings[0].wins }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">
+                        Points
+                    </div>
+                    <div class="col">
+                        {{ standing.driver_standings[0].points }}
+                    </div>
+                </div>
             </div>
         </div>
-        <div>Team: {{ standing.driver_standings[0].constructors[0].name }}</div>
-        <div>Position: {{ standing.driver_standings[0].position }}</div>
-        <div>Wins: {{ standing.driver_standings[0].wins }}</div>
-        <div>Points: {{ standing.driver_standings[0].points }}</div>
     </div>
 </div>
 {% endblock %}

@@ -119,7 +119,6 @@ def races(year=2024):
     race_results.sort(key=itemgetter('round'))
     return render_template("races.html", race_results=race_results, year=year, selected_year=year)
 
-# TODO: Add race details per race
 # Race results
 @app.route("/races/<int:year>/<int:round>")
 def race_results(year, round):
