@@ -20,19 +20,24 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
 {% endblock %}
 
 {% block main %}
-
 <div class="card m-3 p-3 profile-card">
+    <!-- Card Image for Smaller Viewports -->
+    <div class="card-img-top d-lg-none mb-4">
+        <img class="img-fluid rounded profile-img"
+            src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
+            alt="profile image">
+    </div>
     <div class="row">
-        <div class="col">
-            <img class="img-fluid"
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <img class="img-fluid rounded profile-img d-none d-lg-block"
                 src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
-                alt="test">
+                alt="profile image">
         </div>
-        <div class="col">
+        <div class="col-lg-8 col-md-6 col-sm-12">
             <div class="container-sm">
                 <h1>{{ driver.given_name }} {{ driver.family_name }}</h1>
                 <div class="row">
-                    <div class="col profile-category">Date of Birth</em></div>
+                    <div class="col profile-category">Date of Birth</div>
                     <div class="col">{{ driver.date_of_birth }}</div>
                 </div>
                 <div class="row">
@@ -68,8 +73,7 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
                                     {% for year in range(driver_db_data["last_year"], driver_db_data["first_year"]-1,
                                     -1) %}
                                     <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year
-                                        }}
-                                    </option>
+                                        }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -81,31 +85,19 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
                 </div>
                 <div class="row">
                     <div class="col profile-category">Team</div>
-                    <div class="col ">{{ standing.driver_standings[0].constructors[0].name }}</div>
+                    <div class="col">{{ standing.driver_standings[0].constructors[0].name }}</div>
                 </div>
                 <div class="row">
-                    <div class="col profile-category">
-                        Position
-                    </div>
-                    <div class="col">
-                        {{ standing.driver_standings[0].position }}
-                    </div>
+                    <div class="col profile-category">Position</div>
+                    <div class="col">{{ standing.driver_standings[0].position }}</div>
                 </div>
                 <div class="row">
-                    <div class="col profile-category">
-                        Wins
-                    </div>
-                    <div class="col">
-                        {{ standing.driver_standings[0].wins }}
-                    </div>
+                    <div class="col profile-category">Wins</div>
+                    <div class="col">{{ standing.driver_standings[0].wins }}</div>
                 </div>
                 <div class="row">
-                    <div class="col profile-category">
-                        Points
-                    </div>
-                    <div class="col">
-                        {{ standing.driver_standings[0].points }}
-                    </div>
+                    <div class="col profile-category">Points</div>
+                    <div class="col">{{ standing.driver_standings[0].points }}</div>
                 </div>
             </div>
         </div>
