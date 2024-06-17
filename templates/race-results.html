@@ -40,8 +40,18 @@
             {% for race_result in race_results.results %}
             <tr>
                 <td class="col-1">{{ race_result.position }}</td>
-                <td class="col-3">{{ race_result.driver.given_name }} {{ race_result.driver.family_name }}</td>
-                <td class="col-2">{{ race_result.constructor.name }}</td>
+                <td class="col-3">
+                    <a href="/drivers/{{race_result.driver.driver_id}}" class="link-danger link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        {{ race_result.driver.given_name }} {{race_result.driver.family_name }}
+                    </a>
+                </td>
+                <td class="col-2">
+                    <a href="/constructors/{{ race_result.constructor.constructor_id}}" class="link-danger link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        {{ race_result.constructor.name }}
+                    </a>
+                </td>
                 <td class="col-1">{{ race_result.laps }}</td>
                 <td class="col-2">{{ race_result.time.time }}</td>
                 <td class="col-1">{{ race_result.points }}</td>
