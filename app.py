@@ -29,7 +29,6 @@ def drivers(year=2024):
     if request.method == "POST":
         year = request.form.get("year", 2024, type=int)
     driver_standings = e.season(year).get_driver_standing().driver_standings
-    print(driver_standings)
     return render_template("drivers.html", driver_standings = driver_standings, year = year, selected_year = year)
 
 # Driver details
@@ -68,7 +67,7 @@ def constructors(year=2024):
     if request.method == "POST":
         year = request.form.get("year", 2024, type=int)
     constructor_standings = e.season(year).get_constructor_standing().constructor_standings
-    print(e.season(2020).driver('hamilton').get_driver_standing().driver_standings)
+    print(e.season(2024).round(1).get_results())
     return render_template("constructors.html", constructor_standings = constructor_standings, year = year, selected_year = year)
 
 # Constructor details
@@ -120,10 +119,12 @@ def races(year=2024):
     race_results.sort(key=itemgetter('round'))
     return render_template("races.html", race_results=race_results, year=year, selected_year=year)
 
+# TODO: Add race details per race
 # Race results
-@app.route("/races/<int:year>/<string:race_id>")
-def race_result():
-    return "wait"
+@app.route("/races/<int:year>/<int:round>")
+def race_result(year, round):
+    race_result = e.season(year).round(round).get_result()
+    return render_template("race-results.html", race_result=race_result)
 
 # Method for fetching race result per circuit in a season
 async def fetch_race_result(session, year, circuit_id):
@@ -155,9 +156,6 @@ async def get_race_results(year):
         race_results = await asyncio.gather(*tasks)
         return [result for result in race_results if result]
 
-# TODO: Add race details per race
-# TODO: Add constructor details as well as database entries
 # TODO: Add news api for homepage
-# TODO: Add championships, wins, and points for drivers and constructors
 # TODO: Add pictures for constructors and drivers
 # TODO: Fix bugs for some drivers profiles returning more than one query
