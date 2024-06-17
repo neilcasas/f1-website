@@ -74,12 +74,35 @@ def constructors(year=2024):
 # Constructor details
 @app.route("/constructors/<string:constructor_id>")
 def constructor_profile(constructor_id):
+    db = create_db_connection()
+    mycursor = db.cursor()
+
+    # Get team's first year and final year
+    mycursor.execute("SELECT first_year, last_year, points, wins, championships FROM team_profile WHERE team_id = %s", (constructor_id,))
+    result = mycursor.fetchone()
+    first_year, last_year, points, wins, championships = result if result else (None, None, 0, 0, 0)
+    constructor_db_data = {"first_year": first_year, "last_year": last_year, "points": points, "wins": wins, "championships": championships}
+
+    # Close cursor and conection
+    mycursor.close()
+    db.close()
+
     # Get constructor data
     constructor_data = e.constructor(constructor_id).get_constructor()
-    print(e.season(1961).round(1).get_results())
-    return render_template("constructor-profile.html", constructor=constructor_data)
+    constructor_standing = e.constructor(constructor_id).season(last_year).get__standing()
 
-# Race results
+    # If filtered by year
+    if request.method == "POST":
+        year = request.form.get("year", last_year, type=int) # year filter
+        constructor_standing = e.constructor(constructor_id).season(year).get_standing()
+        return render_template("constructor-profile.html", constructor=constructor_data, standing=constructor_standing, 
+                               constructor_db_data = constructor_db_data, selected_year = year)
+
+    print(e.season(2024).round(1).get_results())
+    return render_template("constructor-profile.html", constructor=constructor_data, standing = constructor_standing, 
+                           constructor_db_data = constructor_db_data, selected_year = last_year)
+
+# All winners of all races within a season
 @app.route("/races", methods=["GET", "POST"])
 def races(year=2024):
     if request.method == "POST":
@@ -98,6 +121,11 @@ def races(year=2024):
     # Sort by round
     race_results.sort(key=itemgetter('round'))
     return render_template("races.html", race_results=race_results, year=year, selected_year=year)
+
+# Race results
+@app.route("/races/<int:year>/<string:race_id>")
+def race_result():
+    return "wait"
 
 # Method for fetching race result per circuit in a season
 async def fetch_race_result(session, year, circuit_id):
