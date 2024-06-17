@@ -34,7 +34,7 @@ Constructor - {{ constructor.name }}
                 <h3>{{ selected_year }} Constructor Standing</h3>
             </div>
             <div class="col">
-                <form method="POST" action="/constructor/{{ constructor.constructor_id }}" class="d-flex">
+                <form method="POST" action="/constructors/{{ constructor.constructor_id }}" class="d-flex">
                     <div class="col-auto me-2">
                         <select class="form-select" name="year" id="year">
                             {% for year in range(constructor_db_data["last_year"], constructor_db_data["first_year"]-1,

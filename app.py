@@ -94,7 +94,7 @@ def constructor_profile(constructor_id):
     # If filtered by year
     if request.method == "POST":
         year = request.form.get("year", last_year, type=int) # year filter
-        constructor_standing = e.constructor(constructor_id).season(year).get_standing()
+        constructor_standing = e.constructor(constructor_id).season(year).get_constructor_standing().constructor_standings[0]
         return render_template("constructor-profile.html", constructor=constructor_data, standing=constructor_standing, 
                                constructor_db_data = constructor_db_data, selected_year = year)
     return render_template("constructor-profile.html", constructor=constructor_data, standing = constructor_standing, 
