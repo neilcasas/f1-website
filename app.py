@@ -72,7 +72,7 @@ def constructors(year=2024):
     return render_template("constructors.html", constructor_standings = constructor_standings, year = year, selected_year = year)
 
 # Constructor details
-@app.route("/constructors/<string:constructor_id>")
+@app.route("/constructors/<string:constructor_id>", methods=["GET", "POST"])
 def constructor_profile(constructor_id):
     db = create_db_connection()
     mycursor = db.cursor()
@@ -89,7 +89,7 @@ def constructor_profile(constructor_id):
 
     # Get constructor data
     constructor_data = e.constructor(constructor_id).get_constructor()
-    constructor_standing = e.constructor(constructor_id).season(last_year).get__standing()
+    constructor_standing = e.constructor(constructor_id).season(last_year).get_constructor_standing().constructor_standings[0]
 
     # If filtered by year
     if request.method == "POST":
@@ -97,8 +97,6 @@ def constructor_profile(constructor_id):
         constructor_standing = e.constructor(constructor_id).season(year).get_standing()
         return render_template("constructor-profile.html", constructor=constructor_data, standing=constructor_standing, 
                                constructor_db_data = constructor_db_data, selected_year = year)
-
-    print(e.season(2024).round(1).get_results())
     return render_template("constructor-profile.html", constructor=constructor_data, standing = constructor_standing, 
                            constructor_db_data = constructor_db_data, selected_year = last_year)
 
