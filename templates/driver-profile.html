@@ -22,18 +22,18 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
 {% block main %}
 <div class="card m-3 p-3 profile-card">
     <!-- Card Image for Smaller Viewports -->
-    <div class="card-img-top d-lg-none mb-4">
+    <div class="card-img-top d-md-none mb-4">
         <img class="img-fluid rounded profile-img"
             src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
             alt="profile image">
     </div>
     <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <img class="img-fluid rounded profile-img d-none d-lg-block"
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <img class="img-fluid rounded profile-img d-none d-md-block"
                 src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
                 alt="profile image">
         </div>
-        <div class="col-lg-8 col-md-6 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="container-sm">
                 <h1>{{ driver.given_name }} {{ driver.family_name }}</h1>
                 <div class="row">
