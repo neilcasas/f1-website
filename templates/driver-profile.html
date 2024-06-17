@@ -24,10 +24,12 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
 <div class="card m-3 p-3">
     <div class="container-fluid">
         <h1>{{ driver.given_name }} {{ driver.family_name }}</h1>
-        <div>Team: {{ standing.driver_standings[0].constructors[0].name }}</div>
         <div>Date of Birth: {{ driver.date_of_birth }}</div>
         <div>Nationality: {{ driver.nationality }}</div>
         <div>Permanent Number: {{ driver.permanent_number }}</div>
+        <div>Points: {{ driver_db_data["points"] }}</div>
+        <div>Wins: {{ driver_db_data["wins"] }}</div>
+        <div>Championships: {{ driver_db_data["championships"] }}</div>
     </div>
     <div class="container-fluid pt-3 pb-3">
         <div class="row">
@@ -50,6 +52,7 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
                 </form>
             </div>
         </div>
+        <div>Team: {{ standing.driver_standings[0].constructors[0].name }}</div>
         <div>Position: {{ standing.driver_standings[0].position }}</div>
         <div>Wins: {{ standing.driver_standings[0].wins }}</div>
         <div>Points: {{ standing.driver_standings[0].points }}</div>
