@@ -20,40 +20,79 @@ Constructor - {{ constructor.name }}
 {% endblock %}
 
 {% block main %}
-<div class="card m-3 p-3">
-    <div class="container-fluid">
-        <h1>{{ constructor.name }}</h1>
-        <div>Nationality: {{ constructor.nationality }}</div>
-        <div>Points: {{ constructor_db_data["points"] }}</div>
-        <div>Wins: {{ constructor_db_data["wins"] }}</div>
-        <div>Championships: {{ constructor_db_data["championships"] }}</div>
+<div class="card m-3 p-3 profile-card">
+    <div class="card-img-top d-md-none mb-4">
+        <img class="img-fluid rounded profile-img"
+            src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
+            alt="profile image">
     </div>
-    <div class="container-fluid pt-3 pb-3">
-        <div class="row">
-            <div class="col-auto ms-1">
-                <h3>{{ selected_year }} Constructor Standing</h3>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <img class="img-fluid rounded profile-img d-none d-md-block"
+                src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
+                alt="profile image">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="container-sm">
+                <h1>{{ constructor.name }}</h1>
+                <div class="row">
+                    <div class="col profile-category">Nationality</div>
+                    <div class="col">{{ constructor.nationality }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Points</div>
+                    <div class="col">{{ constructor_db_data[" points"] }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Wins</div>
+                    <div class="col">{{ constructor_db_data["wins"] }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Championships</div>
+                    <div class="col">{{ constructor_db_data["championships"] }}</div>
+                </div>
             </div>
-            <div class="col">
-                <form method="POST" action="/constructors/{{ constructor.constructor_id }}" class="d-flex">
-                    <div class="col-auto me-2">
-                        <select class="form-select" name="year" id="year">
-                            {% for year in range(constructor_db_data["last_year"], constructor_db_data["first_year"]-1,
-                            -1)
-                            %}
-                            <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
-                            </option>
-                            {% endfor %}
-                        </select>
+            <div class="container-fluid pt-3 pb-3">
+                <div class="row">
+                    <div class="col-auto ms-1">
+                        <h3>{{ selected_year }} Constructor Standing</h3>
                     </div>
-                    <div class="col-auto align-self-end">
-                        <button type="submit" class="btn btn-danger">Filter</button>
+                    <div class="col">
+                        <form method="POST" action="/constructors/{{ constructor.constructor_id }}" class="d-flex">
+                            <div class="col-auto me-2">
+                                <select class="form-select" name="year" id="year">
+                                    {% for year in range(constructor_db_data["last_year"],
+                                    constructor_db_data["first_year"]-1,
+                                    -1)
+                                    %}
+                                    <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>
+                                        {{
+                                        year
+                                        }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-auto align-self-end">
+                                <button type="submit" class="btn btn-danger">Filter</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Position</div>
+                    <div class="col">{{ standing.position }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Wins</div>
+                    <div class="col">{{ standing.wins }}</div>
+                </div>
+                <div class="row">
+                    <div class="col profile-category">Points</div>
+                    <div class="col">{{ standing.points }}</div>
+                </div>
             </div>
         </div>
-        <div>Position: {{ standing.position }}</div>
-        <div>Wins: {{ standing.wins }}</div>
-        <div>Points: {{ standing.points }}</div>
     </div>
 </div>
 {% endblock %}
