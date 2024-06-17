@@ -122,9 +122,9 @@ def races(year=2024):
 # TODO: Add race details per race
 # Race results
 @app.route("/races/<int:year>/<int:round>")
-def race_result(year, round):
-    race_result = e.season(year).round(round).get_result()
-    return render_template("race-results.html", race_result=race_result)
+def race_results(year, round):
+    race_results = e.season(year).round(round).get_result()
+    return render_template("race-results.html", race_results=race_results)
 
 # Method for fetching race result per circuit in a season
 async def fetch_race_result(session, year, circuit_id):

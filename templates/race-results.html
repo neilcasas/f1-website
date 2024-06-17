@@ -21,55 +21,29 @@ Race Results
 
 {% block main %}
 <header>
-    <h1 class="m-4">{{ year }} Formula 1 Race Results</h1>
+    <h1 class="m-4">{{ year }} {{ race_results.race_name }} Race Results</h1>
 </header>
 <div class="card p-3 m-3">
-    <div class="container-fluid pt-3 pb-3">
-        <div class="row">
-            <form method="POST" action="/races" class="d-flex">
-                <div class="col-auto me-2">
-                    <select class="form-select" name="year" id="year">
-                        {% for year in range(2024, 1957, -1) %}
-                        <option value="{{ year }}" {% if year==selected_year %}selected{% endif %}>{{ year }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-auto align-self-end">
-                    <button type="submit" class="btn btn-danger">Filter</button>
-                </div>
-            </form>
-        </div>
-    </div>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th class="col-1">Round</th>
-                    <th class="col-2">Name</th>
-                    <th class="col-2">Circuit</th>
-                    <th class="col-4">Winner</th>
-                    <th class="col-3">Team</th>
+                    <th class="col-1">Position</th>
+                    <th class="col-3">Driver</th>
+                    <th class="col-2">Team</th>
+                    <th class="col-1">Laps</th>
+                    <th class="col-2">Time</th>
+                    <th class="col-1">Points</th>
                 </tr>
             </thead>
-            {% for race_result in race_results %}
+            {% for race_result in race_results.results %}
             <tr>
-                <td class="col-1">{{ race_result.round }}</td>
-                <td class="col-3">{{ race_result.raceName }}</td>
-                <td class="col-3"> {{ race_result.Circuit.circuitName }}</td>
-                <td class="col-3 driver">
-                    <a href="/drivers/{{ race_result.Results[0].Driver.driverId }}" class="link-danger link-offset-2
-                        link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                        {{ race_result.Results[0].Driver.givenName }}
-                        {{ race_result.Results[0].Driver.familyName }}
-                    </a>
-                </td>
-                <td class="col-2 constructor">
-                    <a href="/constructors/{{ race_result.Results[0].Constructor.constructorId }}"
-                        class="link-danger link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                        {{ race_result.Results[0].Constructor.name }}
-                    </a>
-                </td>
+                <td class="col-1">{{ race_result.position }}</td>
+                <td class="col-3">{{ race_result.driver.given_name }} {{ race_result.driver.family_name }}</td>
+                <td class="col-2">{{ race_result.constructor.name }}</td>
+                <td class="col-1">{{ race_result.laps }}</td>
+                <td class="col-2">{{ race_result.time.time }}</td>
+                <td class="col-1">{{ race_result.points }}</td>
             </tr>
             {% endfor %}
         </table>
