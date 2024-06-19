@@ -24,22 +24,8 @@ Home
     <section class="latest-race-results">
         <h1 class="mt-4 mb-4 text-center">{{ race.season }} {{ race.race_name }} Results</h1>
         <div class="row">
-            <!--2nd place-->
-            <div class="col">
-                <a href="/drivers/{{ podium[1]['driver_id']}}">
-                    <div class="card text-bg-dark podium">
-                        <img src="{{ podium[1]['pic'] }}" class="card-img" alt="{{ podium[1]['driver_id'] }}">
-                        <div class="card-img-overlay">
-                            <h5 class="card-title podium-pos">2nd Place</h5>
-                            <h5 class="card-title podium-name">{{ podium[1]["given_name"]}} {{
-                                podium[1]["family_name"]}}
-                            </h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
             <!--1st place-->
-            <div class="col">
+            <div class="col-12 col-md-4 mb-2">
                 <a href="/drivers/{{ podium[0]['driver_id']}}">
                     <div class="card text-bg-dark podium">
                         <img src="{{ podium[0]['pic'] }}" class="card-img" alt="{{ podium[0]['driver_id'] }}">
@@ -52,8 +38,22 @@ Home
                     </div>
                 </a>
             </div>
+            <!--2nd place-->
+            <div class="col-12 col-md-4 mb-2">
+                <a href="/drivers/{{ podium[1]['driver_id']}}">
+                    <div class="card text-bg-dark podium">
+                        <img src="{{ podium[1]['pic'] }}" class="card-img" alt="{{ podium[1]['driver_id'] }}">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title podium-pos">2nd Place</h5>
+                            <h5 class="card-title podium-name">{{ podium[1]["given_name"]}} {{
+                                podium[1]["family_name"]}}
+                            </h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
             <!--3rd place-->
-            <div class="col">
+            <div class="col-12 col-md-4 mb-2">
                 <a href="/drivers/{{ podium[2]['driver_id']}}">
                     <div class="card text-bg-dark podium">
                         <img src="{{ podium[2]['pic'] }}" class="card-img" alt="{{ podium[2]['driver_id'] }}">
