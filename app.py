@@ -25,7 +25,9 @@ def create_db_connection():
 def index():
     # Initializing news api 
     newsapi = NewsApiClient(api_key='52dc7bcd93b547baa52272cd832199b5')
-    
+    # Get top headlines about F1
+    f1_headlines = newsapi.get_everything(q='formula 1 racing',language='en', page=1, sort_by='popularity')
+    print(top_headlines)
     return render_template("index.html")
 
 # Driver standings
