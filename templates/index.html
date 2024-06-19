@@ -26,36 +26,45 @@ Home
         <div class="row">
             <!--2nd place-->
             <div class="col">
-                <div class="card text-bg-dark podium">
-                    <img src="{{ podium[1]['pic'] }}" class="card-img" alt="{{ podium[1]['driver_id'] }}">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title podium-pos">2nd Place</h5>
-                        <h5 class="card-title podium-name">{{ podium[1]["given_name"]}} {{ podium[1]["family_name"]}}
-                        </h5>
+                <a href="/drivers/{{ podium[1]['driver_id']}}">
+                    <div class="card text-bg-dark podium">
+                        <img src="{{ podium[1]['pic'] }}" class="card-img" alt="{{ podium[1]['driver_id'] }}">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title podium-pos">2nd Place</h5>
+                            <h5 class="card-title podium-name">{{ podium[1]["given_name"]}} {{
+                                podium[1]["family_name"]}}
+                            </h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <!--1st place-->
             <div class="col">
-                <div class="card text-bg-dark podium">
-                    <img src="{{ podium[0]['pic'] }}" class="card-img" alt="{{ podium[0]['driver_id'] }}">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title podium-pos">1st Place</h5>
-                        <h5 class="card-title podium-name">{{ podium[0]["given_name"]}} {{ podium[0]["family_name"]}}
-                        </h5>
+                <a href="/drivers/{{ podium[0]['driver_id']}}">
+                    <div class="card text-bg-dark podium">
+                        <img src="{{ podium[0]['pic'] }}" class="card-img" alt="{{ podium[0]['driver_id'] }}">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title podium-pos">1st Place</h5>
+                            <h5 class="card-title podium-name">{{ podium[0]["given_name"]}} {{
+                                podium[0]["family_name"]}}
+                            </h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <!--3rd place-->
             <div class="col">
-                <div class="card text-bg-dark podium">
-                    <img src="{{ podium[2]['pic'] }}" class="card-img" alt="{{ podium[2]['driver_id'] }}">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title podium-pos">3rd Place</h5>
-                        <h5 class="card-title podium-name">{{ podium[2]["given_name"]}} {{ podium[2]["family_name"]}}
-                        </h5>
+                <a href="/drivers/{{ podium[2]['driver_id']}}">
+                    <div class="card text-bg-dark podium">
+                        <img src="{{ podium[2]['pic'] }}" class="card-img" alt="{{ podium[2]['driver_id'] }}">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title podium-pos">3rd Place</h5>
+                            <h5 class="card-title podium-name">{{ podium[2]["given_name"]}} {{
+                                podium[2]["family_name"]}}
+                            </h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="card p-3 m-3">
