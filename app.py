@@ -22,7 +22,7 @@ def create_db_connection():
 
 @app.route("/")
 def index():
-
+    # TODO: Implement way to update driver's points, constructor points when visiting the homepage
     # Initializing news api 
     newsapi = NewsApiClient(api_key='52dc7bcd93b547baa52272cd832199b5')
 
@@ -37,8 +37,7 @@ def index():
     latest_results = e.season().round().get_result()
 
     # Get podium
-    podium = latest_results.results[:3]
-    print(podium)
+    podium = create_podium(latest_results.results)
     return render_template("index.html", articles=f1_articles, race_results=latest_results, race=race, podium=podium)
 
 # Driver standings
@@ -173,6 +172,36 @@ async def get_race_results(year):
         # Perform the fetch requests in the tasks list concurrently
         race_results = await asyncio.gather(*tasks)
         return [result for result in race_results if result]
+    
 
-# TODO: Add pictures for constructors and drivers
-# TODO: Fix bugs for some drivers profiles returning more than one query
+# Create podium out of latest results, return list of driver dictionaries
+def create_podium(latest_results):
+    podium = []
+    list = latest_results[:3]
+
+    # Create db
+    db = create_db_connection()
+    cursor = db.cursor()
+    for item in list:
+        # Get info
+        given_name = item.driver.given_name
+        family_name = item.driver.family_name
+        driver_id = item.driver.driver_id
+
+        # Get image from driver_id
+        cursor.execute("SELECT pic FROM driver_profile WHERE driver_id = %s", (driver_id,))
+        result = cursor.fetchone()
+
+        # Check if the result is None
+        if result is None:
+            pic = None
+        else:
+            pic = result[0]
+
+        # Create driver dictionary
+        driver = {'driver_id':driver_id, 'given_name':given_name, 'family_name': family_name, 'pic':pic}
+        podium.append(driver)
+
+    cursor.close()
+    db.close()
+    return podium

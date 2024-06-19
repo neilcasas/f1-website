@@ -57,6 +57,10 @@ td {
     font-family: 'Audiowide';
 }
 
+.podium-name {
+    font-size: 0.9rem;
+}
+
 .articles {
     display: flex;
     padding: 1rem 0;
