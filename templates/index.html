@@ -23,6 +23,42 @@ Home
 <div class="container-fluid">
     <section class="latest-race-results">
         <h1 class="mt-4 mb-4 text-center">{{ race.season }} {{ race.race_name }} Results</h1>
+        <div class="card p-3 m-3">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-1">Position</th>
+                            <th class="col-3">Driver</th>
+                            <th class="col-2">Team</th>
+                            <th class="col-1">Laps</th>
+                            <th class="col-2">Time</th>
+                            <th class="col-1">Points</th>
+                        </tr>
+                    </thead>
+                    {% for race_result in race_results.results %}
+                    <tr>
+                        <td class="col-1">{{ race_result.position }}</td>
+                        <td class="col-3">
+                            <a href="/drivers/{{race_result.driver.driver_id}}" class="link-danger link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                {{ race_result.driver.given_name }} {{race_result.driver.family_name }}
+                            </a>
+                        </td>
+                        <td class="col-2">
+                            <a href="/constructors/{{ race_result.constructor.constructor_id}}" class="link-danger link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                {{ race_result.constructor.name }}
+                            </a>
+                        </td>
+                        <td class="col-1">{{ race_result.laps }}</td>
+                        <td class="col-2">{{ race_result.time.time }}</td>
+                        <td class="col-1">{{ race_result.points }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
     </section>
     <section class="article-section">
         <div class="container-fluid mt-2 mb-2">

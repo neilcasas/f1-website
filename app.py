@@ -34,10 +34,10 @@ def index():
                                           )['articles']
     # Get latest results
     race = e.season().round().get_race()
-    latest_results = e.season().round().get_results()
+    latest_results = e.season().round().get_result()
     print(race  )
     print(latest_results)
-    return render_template("index.html", articles=f1_articles, results=latest_results, race=race)
+    return render_template("index.html", articles=f1_articles, race_results=latest_results, race=race)
 
 # Driver standings
 @app.route("/drivers", methods=["GET", "POST"])
