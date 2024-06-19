@@ -20,4 +20,21 @@ Home
 {% endblock %}
 
 {% block main %}
+<div class="container">
+    <h1>Articles</h1>
+    <div class="container articles">
+        <div class="row">
+            {% for article in articles %}
+            <div class="card article-card" style="width: 18rem;">
+                <img src="{{article['urlToImage']}}" class="card-img-top" alt="{}">
+                <div class="card-body">
+                    <h5 class="card-title">{{article['title']}}</h5>
+                    <p class="card-text">{{article['description']}}</p>
+                    <a href="{{article['url']}}" class="btn btn-primary">Read article</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
