@@ -35,7 +35,10 @@ def index():
     # Get latest results
     race = e.season().round().get_race()
     latest_results = e.season().round().get_result()
+
+    # Get podium
     podium = latest_results.results[:3]
+    print(podium)
     return render_template("index.html", articles=f1_articles, race_results=latest_results, race=race, podium=podium)
 
 # Driver standings
@@ -55,8 +58,9 @@ def driver_profile(driver_id):
     # Get driver's rookie year and final year
     mycursor.execute("SELECT pic, first_year, last_year, points, wins, championships FROM driver_profile WHERE driver_id = %s", (driver_id,))
     result = mycursor.fetchone()
+    fallback_pic = """https://yt3.googleusercontent.com/ytc/AIdro_mmKAqlB_4g8BlELUXEIvVMW7P93zqX9warUvTXda3cN0Q=s900-c-k-c0x00ffffff-no-rj"""
     pic, first_year, last_year, points, wins, championships = result if result else (None, None, None, 0, 0, 0)
-    driver_db_data = {"pic": pic, "first_year": first_year, "last_year": last_year, "points": points, "wins": wins, "championships": championships}
+    driver_db_data = {"pic": pic if pic else fallback_pic, "first_year": first_year, "last_year": last_year, "points": points, "wins": wins, "championships": championships}
 
     # Close cursor and conection
     mycursor.close()
