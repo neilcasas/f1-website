@@ -27,14 +27,17 @@ def index():
     newsapi = NewsApiClient(api_key='52dc7bcd93b547baa52272cd832199b5')
 
     # Get top headlines about F1
-    f1_articles = newsapi.get_everything(q='formula+1+grand+prix+results',
+    f1_articles = newsapi.get_everything(q="formula+1+race+results",
                                           language='en', 
-                                          page_size=4, 
+                                          page_size=8, 
                                           sort_by='relevancy',
                                           )['articles']
     # Get latest results
+    race = e.season().round().get_race()
     latest_results = e.season().round().get_results()
-    return render_template("index.html", articles=f1_articles)
+    print(race  )
+    print(latest_results)
+    return render_template("index.html", articles=f1_articles, results=latest_results, race=race)
 
 # Driver standings
 @app.route("/drivers", methods=["GET", "POST"])

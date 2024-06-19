@@ -21,22 +21,29 @@ Home
 
 {% block main %}
 <div class="container-fluid">
-    <h1 class="mt-4 mb-4 text-center">Articles</h1>
-    <div class="container-fluid articles justify-content-center">
-        <div class="row g-4 justify-content-center">
-            {% for article in articles %}
-            <div class="col-auto g-4 justify-content-center">
-                <div class="card h-100 article-card justify-content-center">
-                    <img src="{{article['urlToImage']}}" class="card-img-top" alt="Article image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{article['title']}}</h5>
-                        <p class="card-text">{{article['description']}}</p>
-                        <a href="{{article['url']}}" class="btn btn-danger">Read article</a>
+    <section class="latest-race-results">
+        <h1 class="mt-4 mb-4 text-center">{{ race.season }} {{ race.race_name }} Results</h1>
+    </section>
+    <section class="article-section">
+        <div class="container-fluid mt-2 mb-2">
+            <h1 class="mt-4 mb-4 text-center">Articles</h1>
+            <div class="container-fluid articles justify-content-center">
+                <div class="row g-4 justify-content-center">
+                    {% for article in articles %}
+                    <div class="col-auto g-4 justify-content-center">
+                        <div class="card h-100 article-card justify-content-center">
+                            <img src="{{article['urlToImage']}}" class="card-img-top" alt="Article image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{article['title']}}</h5>
+                                <p class="card-text">{{article['description']}}</p>
+                                <a href="{{article['url']}}" class="btn btn-danger">Read article</a>
+                            </div>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
+    </section>
 </div>
 {% endblock %}
