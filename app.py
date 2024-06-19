@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from newsapi import NewsApiClient
 from operator import itemgetter
 import ergast_py
 import asyncio
@@ -19,8 +20,12 @@ def create_db_connection():
         database="mode_push"
     )
 
+# TODO: Add news api for homepage
 @app.route("/")
 def index():
+    # Initializing news api 
+    newsapi = NewsApiClient(api_key='52dc7bcd93b547baa52272cd832199b5')
+    
     return render_template("index.html")
 
 # Driver standings
@@ -155,6 +160,5 @@ async def get_race_results(year):
         race_results = await asyncio.gather(*tasks)
         return [result for result in race_results if result]
 
-# TODO: Add news api for homepage
 # TODO: Add pictures for constructors and drivers
 # TODO: Fix bugs for some drivers profiles returning more than one query
