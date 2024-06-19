@@ -53,6 +53,9 @@ td {
 }
 
 /* Home styling */
+.podium-pos {
+    font-family: 'Audiowide';
+}
 
 .articles {
     display: flex;
@@ -63,6 +66,7 @@ td {
 .article-card {
     flex: 0 0 auto;
     width: 18rem;
+    cursor: pointer;
 }
 
 .article-section .card-img-top {

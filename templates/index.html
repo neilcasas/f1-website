@@ -26,31 +26,34 @@ Home
         <div class="row">
             <!--2nd place-->
             <div class="col">
-                <div class="card text-bg-dark">
+                <div class="card text-bg-dark podium">
                     <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
                         class="card-img" alt="...">
                     <div class="card-img-overlay">
-                        <h5 class="card-title">2nd Place {{ podium[1].driver.driver_id}}</h5>
+                        <h5 class="card-title podium-pos">2nd Place</h5>
+                        <h5 class="card-title">{{ podium[1].driver.given_name}} {{ podium[1].driver.family_name}}</h5>
                     </div>
                 </div>
             </div>
             <!--1st place-->
             <div class="col">
-                <div class="card text-bg-dark">
+                <div class="card text-bg-dark podium">
                     <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
                         class="card-img" alt="...">
                     <div class="card-img-overlay">
-                        <h5 class="card-title">1st Place {{ podium[0].driver.driver_id}}</h5>
+                        <h5 class="card-title podium-pos">1st Place</h5>
+                        <h5 class="card-title">{{ podium[0].driver.given_name}} {{ podium[0].driver.family_name}}</h5>
                     </div>
                 </div>
             </div>
             <!--3rd place-->
             <div class="col">
-                <div class="card text-bg-dark">
+                <div class="card text-bg-dark podium">
                     <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
                         class="card-img" alt="...">
                     <div class="card-img-overlay">
-                        <h5 class="card-title">3rd Place {{ podium[2].driver.driver_id}}</h5>
+                        <h5 class="card-title podium-pos">3rd Place</h5>
+                        <h5 class="card-title">{{ podium[2].driver.given_name}} {{ podium[2].driver.family_name}}</h5>
                     </div>
                 </div>
             </div>
