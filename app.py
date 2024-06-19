@@ -20,17 +20,20 @@ def create_db_connection():
         database="mode_push"
     )
 
-# TODO: Add news api for homepage
 @app.route("/")
 def index():
+
     # Initializing news api 
     newsapi = NewsApiClient(api_key='52dc7bcd93b547baa52272cd832199b5')
+
     # Get top headlines about F1
     f1_articles = newsapi.get_everything(q='formula+1+grand+prix+results',
                                           language='en', 
                                           page_size=4, 
                                           sort_by='relevancy',
                                           )['articles']
+    # Get latest results
+    latest_results = e.season().round().get_results()
     return render_template("index.html", articles=f1_articles)
 
 # Driver standings

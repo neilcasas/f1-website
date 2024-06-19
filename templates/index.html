@@ -21,12 +21,12 @@ Home
 
 {% block main %}
 <div class="container-fluid">
-    <h1>Articles</h1>
-    <div class="container-fluid articles">
-        <div class="row g-4">
+    <h1 class="mt-4 mb-4 text-center">Articles</h1>
+    <div class="container-fluid articles justify-content-center">
+        <div class="row g-4 justify-content-center">
             {% for article in articles %}
-            <div class="col g-4">
-                <div class="card h-100 article-card">
+            <div class="col-auto g-4 justify-content-center">
+                <div class="card h-100 article-card justify-content-center">
                     <img src="{{article['urlToImage']}}" class="card-img-top" alt="Article image">
                     <div class="card-body">
                         <h5 class="card-title">{{article['title']}}</h5>
