@@ -51,3 +51,48 @@ td {
 .profile-category {
     font-weight: 500;
 }
+
+/* Home styling */
+
+.articles {
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem 0;
+    gap: 1rem;
+}
+
+.article-card {
+    flex: 0 0 auto;
+    width: 18rem;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.btn-primary {
+    align-self: start;
+    margin-top: auto;
+}
