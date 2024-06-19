@@ -23,6 +23,38 @@ Home
 <div class="container-fluid">
     <section class="latest-race-results">
         <h1 class="mt-4 mb-4 text-center">{{ race.season }} {{ race.race_name }} Results</h1>
+        <div class="row">
+            <!--2nd place-->
+            <div class="col">
+                <div class="card text-bg-dark">
+                    <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
+                        class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">2nd Place {{ podium[1].driver.driver_id}}</h5>
+                    </div>
+                </div>
+            </div>
+            <!--1st place-->
+            <div class="col">
+                <div class="card text-bg-dark">
+                    <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
+                        class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">1st Place {{ podium[0].driver.driver_id}}</h5>
+                    </div>
+                </div>
+            </div>
+            <!--3rd place-->
+            <div class="col">
+                <div class="card text-bg-dark">
+                    <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
+                        class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">3rd Place {{ podium[2].driver.driver_id}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card p-3 m-3">
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
