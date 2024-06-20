@@ -22,7 +22,6 @@ def create_db_connection():
 
 @app.route("/")
 def index():
-    # TODO: Implement way to update driver's points, constructor points when visiting the homepage
     # Initializing news api 
     newsapi = NewsApiClient(api_key='52dc7bcd93b547baa52272cd832199b5')
 
@@ -35,9 +34,13 @@ def index():
     # Get latest results
     race = e.season().round().get_race()
     latest_results = e.season().round().get_result()
+    print(e.season().get_constructor_standing())
 
     # Get podium
     podium = create_podium(latest_results.results)
+
+    # Check if latest round in db
+    check_db(latest_results)
     return render_template("index.html", articles=f1_articles, race_results=latest_results, race=race, podium=podium)
 
 # Driver standings
@@ -206,3 +209,65 @@ def create_podium(latest_results):
     cursor.close()
     db.close()
     return podium
+
+# TODO: Implement way to update driver's points, constructor points when visiting the homepage
+
+# Check db if it has the latest round
+def check_db(latest_results):
+    db = create_db_connection()
+    cursor = db.cursor()
+
+    updated_round = latest_results.round_no
+
+    cursor.execute("SELECT round FROM current_season")
+    result = cursor.fetchone()
+    saved_round = result[0] if result else 0
+
+    if updated_round > saved_round:
+        update_db(updated_round, db)
+    else:
+        print('db is updated')
+
+    cursor.close()
+    db.close()
+
+# Update drivers and teams based on latest race results
+def update_db(updated_round, db):
+    # Get first ten results only
+    results = e.season().round(updated_round).get_result().results[:10]
+    
+    cursor = db.cursor()
+    
+    for result in results:
+        driver_id = result.driver.driver_id
+        team_id = result.constructor.constructor_id
+        points = int(result.points)
+        
+        update_driver(driver_id, db, cursor, points)
+        update_team(team_id, db, cursor, points)
+
+    cursor.execute('UPDATE current_season SET round = %s', (updated_round,))
+    db.commit()
+    cursor.close()
+
+# Update driver's entry in database after new round
+def update_driver(driver_id, db, cursor, round_points):
+    cursor.execute('SELECT points FROM driver_profile WHERE driver_id = %s', (driver_id,))
+    result = cursor.fetchone()
+    old_points = result[0] if result else 0
+
+    new_points = old_points + round_points
+
+    cursor.execute('UPDATE driver_profile SET points = %s WHERE driver_id = %s', (new_points, driver_id))
+    db.commit()
+
+# Update team's entry in database after new round
+def update_team(team_id, db, cursor, round_points):
+    cursor.execute('SELECT points FROM team_profile WHERE team_id = %s', (team_id,))
+    result = cursor.fetchone()
+    old_points = result[0] if result else 0
+
+    new_points = old_points + round_points
+
+    cursor.execute('UPDATE team_profile SET points = %s WHERE team_id = %s', (new_points, team_id))
+    db.commit()
