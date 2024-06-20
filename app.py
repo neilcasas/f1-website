@@ -211,8 +211,6 @@ def create_podium(latest_results):
     db.close()
     return podium
 
-# TODO: Implement way to update driver's points, constructor points when visiting the homepage
-
 # Check db if it has the latest round
 def check_db(latest_results):
     db = create_db_connection()
