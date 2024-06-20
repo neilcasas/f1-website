@@ -206,8 +206,3 @@ def create_podium(latest_results):
     cursor.close()
     db.close()
     return podium
-
-# TODO: Add constructor pictures
-# TODO: Add remaning driver pictures
-# TODO: Add footer 
-# TODO: Add hover effects to podium and to articles
