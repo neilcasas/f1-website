@@ -29,11 +29,6 @@ const footerElement = (function () {
     const footerDiv = document.createElement('div');
     footerDiv.setAttribute('class', 'footer');
 
-    const gitHubIcon = document.createElement('img');
-    gitHubIcon.setAttribute('src', '../static/github.svg');
-    gitHubIcon.setAttribute('alt', 'github-icon');
-    gitHubIcon.setAttribute('id', 'github-icon');
-    footerDiv.appendChild(gitHubIcon);
 
     const footerText = document.createElement('a');
     const footerTextStyles = `link-danger link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover`
