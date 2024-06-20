@@ -95,10 +95,11 @@ def constructor_profile(constructor_id):
     mycursor = db.cursor()
 
     # Get team's first year and final year
-    mycursor.execute("SELECT first_year, last_year, points, wins, championships FROM team_profile WHERE team_id = %s", (constructor_id,))
+    mycursor.execute("SELECT pic, first_year, last_year, points, wins, championships FROM team_profile WHERE team_id = %s", (constructor_id,))
     result = mycursor.fetchone()
-    first_year, last_year, points, wins, championships = result if result else (None, None, 0, 0, 0)
-    constructor_db_data = {"first_year": first_year, "last_year": last_year, "points": points, "wins": wins, "championships": championships}
+    pic, first_year, last_year, points, wins, championships = result if result else (None, None, None, 0, 0, 0)
+    fallback_pic = """https://132slotcar.us/images/products/CAR07-white_01.jpg"""
+    constructor_db_data = {"pic": pic if pic else fallback_pic, "first_year": first_year, "last_year": last_year, "points": points, "wins": wins, "championships": championships}
 
     # Close cursor and conection
     mycursor.close()

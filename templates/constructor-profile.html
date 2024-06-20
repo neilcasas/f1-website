@@ -22,15 +22,13 @@ Constructor - {{ constructor.name }}
 {% block main %}
 <div class="card m-3 p-3 profile-card">
     <div class="card-img-top d-md-none mb-4">
-        <img class="img-fluid rounded profile-img"
-            src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
-            alt="profile image">
+        <img class="img-fluid rounded profile-img" src="{{ constructor_db_data['pic'] }}"
+            alt="{{ constructor.constructor_id }}">
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <img class="img-fluid rounded profile-img d-none d-md-block"
-                src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz"
-                alt="profile image">
+            <img class="img-fluid rounded profile-img d-none d-md-block" src="{{ constructor_db_data['pic'] }}"
+                alt="{{ constructor.constructor_id }}">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="container-sm">

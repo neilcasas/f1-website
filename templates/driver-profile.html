@@ -23,12 +23,12 @@ Drivers - {{ driver.given_name }} {{ driver.family_name }}
 <div class="card m-3 p-3 profile-card">
     <!-- Card Image for Smaller Viewports -->
     <div class="card-img-top d-md-none mb-4">
-        <img class="img-fluid rounded profile-img" src="{{ driver_db_data['pic'] }}" alt="profile image">
+        <img class="img-fluid rounded profile-img" src="{{ driver_db_data['pic'] }}" alt="{{ driver.driver_id }}">
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
             <img class="img-fluid rounded profile-img d-none d-md-block" src="{{ driver_db_data['pic'] }}"
-                alt="profile image">
+                alt="{{ driver.driver_id }}">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="container-sm">
