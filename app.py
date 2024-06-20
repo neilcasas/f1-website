@@ -39,8 +39,9 @@ def index():
     # Get podium
     podium = create_podium(latest_results.results)
 
-    # Check if latest round in db
+    # Check if latest round in db, if not latest then update
     check_db(latest_results)
+
     return render_template("index.html", articles=f1_articles, race_results=latest_results, race=race, podium=podium)
 
 # Driver standings
@@ -243,6 +244,11 @@ def update_db(updated_round, db):
         team_id = result.constructor.constructor_id
         points = int(result.points)
         
+        # Update driver and team wins if driver won
+        if result.position == 1:
+            update_driver_wins(driver_id, db, cursor)
+            update_team_wins(team_id, db, cursor)
+
         update_driver(driver_id, db, cursor, points)
         update_team(team_id, db, cursor, points)
 
@@ -270,4 +276,22 @@ def update_team(team_id, db, cursor, round_points):
     new_points = old_points + round_points
 
     cursor.execute('UPDATE team_profile SET points = %s WHERE team_id = %s', (new_points, team_id))
+    db.commit()
+
+# Update a driver if he won the round
+def update_driver_wins(driver_id, db, cursor):
+    cursor.execute('SELECT wins FROM driver_profile WHERE driver_id = %s', (driver_id,))
+    result = cursor.fetchone()
+    old_wins = result[0] if result else 0
+    new_wins = old_wins + 1
+    cursor.execute('UPDATE driver_profile SET wins = %s WHERE driver_id = %s', (new_wins, driver_id))
+    db.commit()
+
+# Update team if their driver won a round
+def update_team_wins(team_id, db, cursor):
+    cursor.execute('SELECT wins FROM team_profile WHERE team_id = %s', (team_id,))
+    result = cursor.fetchone()
+    old_wins = result[0] if result else 0
+    new_wins = old_wins + 1
+    cursor.execute('UPDATE team_profile SET wins = %s WHERE team_id = %s', (new_wins, team_id))
     db.commit()
