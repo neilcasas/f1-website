@@ -103,3 +103,18 @@ td {
     align-self: start;
     margin-top: auto;
 }
+
+/* Footer styles */
+.footer {
+    display: flex;
+    width: 100%;
+    padding: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+#github-icon {
+    height: 25px;
+}
