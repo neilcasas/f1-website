@@ -117,4 +117,5 @@ td {
 
 #github-icon {
     height: 25px;
+    filter: brightness(0) saturate(100%) invert(22%) sepia(100%) saturate(7480%) hue-rotate(354deg) brightness(107%) contrast(110%);
 }
