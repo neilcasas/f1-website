@@ -34,8 +34,7 @@ def index():
     # Get latest results
     race = e.season().round().get_race()
     latest_results = e.season().round().get_result()
-    print(e.season().get_constructor_standing())
-
+    
     # Get podium
     podium = create_podium(latest_results.results)
 
