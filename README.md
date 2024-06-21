@@ -40,3 +40,9 @@ In this route, I fetched the circuits and their winners during that season async
 
 #### Race Results
 This route displays the race results of a specific race, given the year and round route parameters. Using the year and the round, I used the API to query for the race results for that race, which is then displayed to the template.
+
+## Installation
+1. Clone this repository 
+2. Create Python virtual environment ```python3 -m venv venv```
+3. Activate your virtual environment
+4. Install the dependencies ```pip install -r requirements.txt```   
