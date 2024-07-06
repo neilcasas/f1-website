@@ -14,16 +14,16 @@ e = ergast_py.Ergast()
 # Connect DB
 def create_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Password1!",
-        database="mode_push"
+        host="db_host",
+        user="db_user",
+        password="db_password",
+        database="db_name"
     )
 
 @app.route("/")
 def index():
     # Initializing news api 
-    newsapi = NewsApiClient(api_key='52dc7bcd93b547baa52272cd832199b5')
+    newsapi = NewsApiClient(api_key='NEWS_API_KEY_HERE')
 
     # Get top headlines about F1
     f1_articles = newsapi.get_everything(q="formula+1+race+results",
